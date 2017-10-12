@@ -15,4 +15,8 @@ export class Game {
         this.ctx.rect(100, 100, 100, 100);
         this.ctx.fill();
     }
+
+    multiply(n1: number, n2: number): number {
+        return n1 * n2;
+    }
 }
