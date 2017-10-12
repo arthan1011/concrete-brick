@@ -1,4 +1,5 @@
 let path = require('path');
+let CleanWebpackPlugin = require('clean-webpack-plugin');
 let HtmlWebpackPlugin  = require('html-webpack-plugin');
 
 const rules = [
@@ -41,15 +42,21 @@ module.exports = {
         rules: rules
     },
     plugins: [
+        new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             template: 'index.template.ejs',
             inject: 'body',
         }),
     ],
+    devServer: {
+        contentBase: 'dist',
+        port: 3003,
+    },
     resolve: {
         modules: [
             path.resolve('./src'),
             path.resolve('./node_modules')
-        ]
+        ],
+        extensions: [".js", ".json", ".ts"],
     }
 };

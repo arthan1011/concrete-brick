@@ -4,6 +4,7 @@
   "description": "Concrete brick game",
   "scripts": {
     "build": "webpack",
+    "server:dev": "webpack-dev-server --inline --hot",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -12,6 +13,7 @@
   "author": "Artur Shamsiev",
   "license": "ISC",
   "devDependencies": {
+    "clean-webpack-plugin": "^0.1.17",
     "css-loader": "^0.28.7",
     "html-webpack-plugin": "^2.30.1",
     "node-sass": "^4.5.3",
@@ -19,6 +21,7 @@
     "style-loader": "^0.19.0",
     "ts-loader": "^2.3.7",
     "typescript": "^2.5.3",
-    "webpack": "^3.7.1"
+    "webpack": "^3.7.1",
+    "webpack-dev-server": "^2.9.1"
   }
 }
