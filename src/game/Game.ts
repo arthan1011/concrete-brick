@@ -14,11 +14,13 @@ const requestFrame = (() => {
 
 let y = 100;
 let x = 100;
-let endX = 200;
+
+const SPEED = 20; // pixels/second
 
 export default class Game {
     private ctx: CanvasRenderingContext2D;
     private engine: Engine;
+    private direction: string;
 
     constructor(ctx: CanvasRenderingContext2D) {
         this.ctx = ctx;
@@ -33,29 +35,42 @@ export default class Game {
         });
     }
 
+    private _currentX = 75;
+
+    private _currentY = 75;
+
     private mainLoop(time: number) {
-        this.engine.render({
-            brickXPosition: 75,
-            brickYPosition: 75,
+
+        if (this.direction == "right") {
+            this._currentX += 1;
+        } else if (this.direction == "left") {
+            this._currentX -= 1;
+        }
+
+        const options = {
+            brickXPosition: this._currentX,
+            brickYPosition: this._currentY,
             brickSize: 100
-        });
+        };
+        console.log(options);
+        this.engine.render(options);
 
 
         this.ctx.beginPath();
+        this.ctx.fillStyle = 'red';
         this.ctx.rect(x, y, 100, 100);
         this.ctx.fill();
 
         x += 1;
-
-        if (x < endX) {
-            requestFrame(() => {
-                this.mainLoop((performance.now()))
-            });
-        }
+        requestFrame(() => {
+            this.mainLoop((performance.now()))
+        });
     }
-
-
     multiply(n1: number, n2: number): number {
         return n1 * n2;
+    }
+
+    setMovement(movement: string) {
+        this.direction = movement;
     }
 }
