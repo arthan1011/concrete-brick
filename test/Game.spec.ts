@@ -1,7 +1,7 @@
 /**
  * Created by shamsiev on 12.10.2017.
  */
-import {Game} from "../src/game/Game";
+import Game from "../src/game/Game";
 
 describe("Game", () => {
 

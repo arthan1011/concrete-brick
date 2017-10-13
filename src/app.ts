@@ -3,7 +3,7 @@
  */
 
 import './css/app.sass'
-import {Game} from "./game/Game";
+import Game from "./game/Game";
 
 const onReady = () => {
     console.log("working!");
