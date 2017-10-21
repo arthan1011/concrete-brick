@@ -15,7 +15,7 @@ const requestFrame = (() => {
 let y = 100;
 let x = 100;
 
-const SPEED = 20; // pixels/second
+const SPEED = 120; // pixels/second
 
 export default class Game {
     private ctx: CanvasRenderingContext2D;
@@ -30,8 +30,9 @@ export default class Game {
     start() {
         console.log("Game Started!");
 
+        let time = performance.now();
         requestFrame(() => {
-            this.mainLoop(performance.now())
+            this.mainLoop(time)
         });
     }
 
@@ -41,15 +42,21 @@ export default class Game {
 
     private mainLoop(time: number) {
 
+        const now = performance.now();
+
+        let delta = (now - time);
+        console.log('delta: ' + delta);
+        let increment = (delta / 1000.0) * SPEED;
         if (this.direction == "right") {
-            this._currentX += 1;
+            this._currentX += increment;
         } else if (this.direction == "left") {
-            this._currentX -= 1;
+            this._currentX -= increment;
         }
 
+        //noinspection JSSuspiciousNameCombination
         const options = {
-            brickXPosition: this._currentX,
-            brickYPosition: this._currentY,
+            brickXPosition: Math.ceil(this._currentX),
+            brickYPosition: Math.ceil(this._currentY),
             brickSize: 100
         };
         console.log(options);
@@ -62,8 +69,9 @@ export default class Game {
         this.ctx.fill();
 
         x += 1;
+        const nextTime = performance.now();
         requestFrame(() => {
-            this.mainLoop((performance.now()))
+            this.mainLoop(nextTime)
         });
     }
     multiply(n1: number, n2: number): number {
