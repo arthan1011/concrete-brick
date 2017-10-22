@@ -19,12 +19,15 @@ const onReady = () => {
     console.log("working!");
 
     const onKeyup = (key: KeyboardEvent) => {
-        console.log(key.code);
+        game.setMovement(null);
+    };
 
+    const onKeyDown = (key: KeyboardEvent) => {
         let movement: string = determineMovement(key.code);
-
         game.setMovement(movement)
     };
+
+    document.addEventListener("keydown", onKeyDown);
     document.addEventListener("keyup", onKeyup);
 
     const canvas: HTMLCanvasElement = document.getElementById('canvas') as HTMLCanvasElement;
